@@ -1,0 +1,67 @@
+body {
+    background: black;
+
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20%;
+    width: 100%;
+}
+
+div {
+    display: flex;
+    background: black;
+    color: white;
+    font-size: 60px;
+    justify-content: center;
+}
+
+.text1 {
+    font-family: cursive;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+}
+.text2 {
+    font-family: DejaVu Sans Mono, monospace;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #33aaff, 0 0 40px #335aFF, 0 0 50px #0000ff, 0 0 60px #0000dd, 0 0 70px #0000dd;
+}
+
+.text3 {
+    font-family: Blippo, fantasy;
+    font-size: 50px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.261), 0 0 20px rgba(174, 255, 163, 0.179), 0 0 30px #27bd70, 0 0 40px #66ff33, 0 0 50px #15ff00, 0 0 60px #1c6f00, 0 0 70px #0c4800;
+}
+
+.text4 {
+    margin-top: 20px;
+    font-family: Marker Felt, fantasy;
+    font-size: 40px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.261), 0 0 20px rgba(255, 163, 163, 0.179), 0 0 30px #bd2727, 0 0 40px #ff3333, 0 0 50px #ff0000, 0 0 60px #6f0000, 0 0 70px #480000;
+}
+
+.lose-class {
+    font-family: American Typewriter, serif;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+}
+
+button {
+    background: darkred;
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+    width: 200px;
+    height: 40px;
+    box-shadow: 0px 0px 50px 15px grey;
+    margin: 20px;
+    cursor: pointer;
+}
+
+button:hover{
+    box-shadow: 0px 0px 30px 15px white;
+    transition: 0.1s ease-in;
+}
+
+.message{
+    font-size: 1.5rem;
+}

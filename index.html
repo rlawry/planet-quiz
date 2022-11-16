@@ -1,0 +1,18 @@
+<html>
+<link rel="stylesheet" href="main.css">
+<script src="quiz.js"> </script>
+    <body onload="newQuestion()">
+        <div class="row text1">
+            <div id="question"></div>
+        </div>
+        <div>
+            <button class="btn" id="option-1" value=1 onclick="checkAnswer(this)">Option 1</button><button class="btn" id="option-2" value=2 onclick="checkAnswer(this)">Option 3</button><button class="btn" id="option-3" value=0 onclick="checkAnswer(this)">Option 3</button>
+        </div>
+        <div class="row">
+            <div class="message" id="message">For each round you must get all questions correct.</div>
+        </div>
+        <div class="text3" id="round">Round 1</div>
+        <div class="text4" id="win-loss">Points:&nbsp;&nbsp;<span id="points">0</span>
+        </div>
+    </body>
+</html>
