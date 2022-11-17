@@ -1,6 +1,6 @@
 var buttons = [];
 var choices = [];
-var clicks = 0;
+
 
 var game = {
     round1:{
@@ -73,6 +73,10 @@ var game = {
     }
 }
 
+var game2 = {
+    
+}
+
 var round = 1;
 var roundRef = "round1";
 var question = 1;
@@ -125,13 +129,16 @@ function isRoundComplete(q){
     return false;
 }
 
+var correctClicks = 0;
+var wrongClicks = 0;
+
 function checkAnswer(e){
     if(!ended){
-        clicks++;
         if(e.value==correct){
             document.getElementById("message").innerHTML = "Correct";
             document.getElementById("message").classList.remove("lose-class");
             questionList[question-1] = 1;
+            console.log(`${question} question number ----------`);
 
             question++;
             questionRef = "q"+question;
@@ -140,21 +147,24 @@ function checkAnswer(e){
                 console.log("NewRound!");
                 round++;
                 setRound(round);
+                document.body.style.background = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
             }
             winCount++;
             if(!ended){
                 newQuestion();
             }
+            correctClicks++;
         }
         else{
             document.getElementById("message").innerHTML = "Nah.";
             document.getElementById("message").classList.add("lose-class");
+            wrongClicks++;
             newQuestion();
         }
-        console.log(questionList + " check answer");
+        //console.log(questionList + " check answer");
         updatePoints();
     }
-    console.log(`Ended=${ended}`);
+    //console.log(`Ended=${ended}`);
 }
 
 function startGame(){
@@ -163,7 +173,7 @@ function startGame(){
 }
 
 function updatePoints(){
-    document.getElementById("points").innerHTML = winCount;
+    document.getElementById("points").innerHTML = (correctClicks-wrongClicks);
 }
 
 
@@ -187,7 +197,7 @@ function setRound(r){
 
 function gameOver(){
     let gameLength = Object.keys(game).length+1;
-    console.log(`Game length=${gameLength}`);
+    //console.log(`Game length=${gameLength}`);
     if(round == gameLength){return true};
     return false
 }
@@ -202,6 +212,8 @@ function generateQuestion(){
     questionList.forEach(function(element,index){
         if(element == 0){options.push(index)};
     });
-    questionRef = `q${options[Math.floor(Math.random()*options.length)]+1}`;
+    console.log(`${options}`);
+    question = options[Math.floor(Math.random()*options.length)]+1;
+    questionRef = `q${question}`;
     console.log(`questionRef=${questionRef}`);
 }
