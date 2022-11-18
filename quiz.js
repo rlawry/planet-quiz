@@ -74,7 +74,7 @@ var game = {
 }
 
 var game2 = {
-    
+
 }
 
 var round = 1;
@@ -87,8 +87,10 @@ var correct;
 var ended = false;
 var winCount = 0;
 var newCreated = false;
+var begun = false;
 
 var questionList = [];
+var missedList = [];
 
 function newQuestion(){
     generateQuestion();
@@ -102,21 +104,28 @@ function newQuestion(){
     newCreated = true;
     correct = game[roundRef][questionRef].correct;
     clearButtons();
-    buildOptions();
+    setTimeout(buildOptions,2000);
 }
 
 function clearButtons(){
     var things = document.querySelectorAll('.btn');
-    things.forEach(el => el.remove());
+    for(const button of things){
+        button.classList.add("fadeout");
+    }
+    setTimeout(function(){things.forEach(el => el.remove())},980);
 }
 
 function buildOptions(){
     choices.forEach(function(value, i){
-        document.getElementById('buttons').innerHTML += `<button class="btn" id="option-${i}" value=${i+1}>${value}</button>`;
+        document.getElementById('buttons').innerHTML += `<button class="btn fadein" id="option-${i}" value=${i+1}>${value}</button>`;
     });
     document.querySelectorAll(".btn").forEach(el => el.addEventListener("click", function() {
         checkAnswer(this);
     }));
+}
+
+function randomizeQuestionOrder(){
+    choices.length
 }
 
 function isRoundComplete(q){
@@ -131,40 +140,48 @@ function isRoundComplete(q){
 
 var correctClicks = 0;
 var wrongClicks = 0;
+var lastClick = 0;
 
 function checkAnswer(e){
-    if(!ended){
-        if(e.value==correct){
-            document.getElementById("message").innerHTML = "Correct";
-            document.getElementById("message").classList.remove("lose-class");
-            questionList[question-1] = 1;
-            console.log(`${question} question number ----------`);
+    var d = new Date();
+    var t = d.getTime();
+    if(t-lastClick>1500){
+        if(!ended){
+            if(e.value==correct){
+                document.getElementById("message").innerHTML = "Correct";
+                document.getElementById("message").classList.remove("lose-class");
+                questionList[question-1] = 1;
+                console.log(`${question} question number ----------`);
 
-            question++;
-            questionRef = "q"+question;
+                question++;
+                questionRef = "q"+question;
 
-            if(isRoundComplete(questionList)){
-                console.log("NewRound!");
-                round++;
-                setRound(round);
-                document.body.style.background = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+                if(isRoundComplete(questionList)){
+                    console.log("NewRound!");
+                    round++;
+                    setRound(round);
+                    addSplash();
+                    document.body.style.background = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+                }
+                winCount++;
+                if(!ended){
+                    newQuestion();
+                }
+                correctClicks++;
             }
-            winCount++;
-            if(!ended){
+            else{
+                document.getElementById("message").innerHTML = "Nah.";
+                document.getElementById("message").classList.add("lose-class");
+                wrongClicks++;
                 newQuestion();
+                missedList.push([roundRef,questionRef]);
             }
-            correctClicks++;
+            //console.log(questionList + " check answer");
+            updatePoints();
         }
-        else{
-            document.getElementById("message").innerHTML = "Nah.";
-            document.getElementById("message").classList.add("lose-class");
-            wrongClicks++;
-            newQuestion();
-        }
-        //console.log(questionList + " check answer");
-        updatePoints();
+        //console.log(`Ended=${ended}`);
+        lastClick = t;
     }
-    //console.log(`Ended=${ended}`);
 }
 
 function startGame(){
@@ -175,8 +192,6 @@ function startGame(){
 function updatePoints(){
     document.getElementById("points").innerHTML = (correctClicks-wrongClicks);
 }
-
-
 
 function setRound(r){
     if(gameOver()){
@@ -205,6 +220,7 @@ function gameOver(){
 function endGame(){
     ended = true;
     document.getElementById("message").innerHTML = "Game Over.  You did it.";
+    document.body.classList.add("winspin");
 }
 
 function generateQuestion(){
@@ -216,4 +232,27 @@ function generateQuestion(){
     question = options[Math.floor(Math.random()*options.length)]+1;
     questionRef = `q${question}`;
     console.log(`questionRef=${questionRef}`);
+}
+
+function addSplash(){
+    document.getElementById("splash").style = "display:flex; pointer-events: auto;";
+    console.log(round);
+    document.getElementById("round-label").innerHTML = round;   
+}
+
+function removeSplash(){
+    document.getElementById("splash").style = "display:none; pointer-events: none;";
+}
+
+window.onload = function(){
+    document.getElementById("splash").addEventListener("click",function(){
+        if(begun){
+            removeSplash();
+        }
+        else{
+            removeSplash();
+            startGame();
+            begun = true;
+        }
+    });
 }

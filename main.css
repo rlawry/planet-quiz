@@ -1,5 +1,6 @@
 body {
     background: black;
+    user-select: none;
 
 }
 
@@ -55,6 +56,7 @@ button {
     margin: 20px;
     cursor: pointer;
     caret-color: transparent;
+    user-select: none;
 }
 
 button:hover{
@@ -62,6 +64,58 @@ button:hover{
     transition: 0.1s ease-in;
 }
 
+.buttons{
+    height:80px;
+}
+
 .message{
     font-size: 1.5rem;
+}
+
+@keyframes winspin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.winspin{
+    animation: winspin 5s infinite linear;
+    overflow: hidden;
+}
+
+@keyframes fadein {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+.fadein{
+    animation: fadein 1s linear;
+}
+
+@keyframes fadeout {
+    from { opacity: 1;}
+    to { opacity: 0;}
+}
+
+.fadeout{
+    animation: fadeout 1s linear;
+}
+
+.roundsplash{
+    display: flex;
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    top: 0;
+    left: 0;
+    color: white;
+    font-size: 2rem;
+    z-index: 2;
+    background: black;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
 }
