@@ -74,7 +74,93 @@ var game = {
 }
 
 var game2 = {
-
+    round1:{
+        q1:{
+            q: "Polaris is ________ than the Sun",
+            options: {
+                1: "Bigger",
+                2: "Smaller"
+            },
+            correct: 1
+        },
+        q2:{
+            q: "Rigel is ______ than Polaris",
+            options: {
+                1: "Colder",
+                2: "Hotter"
+            },
+            correct: 2
+        },
+        q3:{
+            q: "Barnard's Star is ___________ than Proxima Centauri",
+            options: {
+                1: "Larger",
+                2: "Smaller"
+            },
+            correct: 1
+        },
+        q4:{
+            q: "Alpha Centauri is ___________ than Sirius",
+            options: {
+                1: "Redder",
+                2: "Bluer"
+            },
+            correct: 1
+        },
+        q5:{
+            q: "Spica is ___________ than 40 Eridani B",
+            options: {
+                1: "Dimmer",
+                2: "Brighter"
+            },
+            correct: 2
+        }
+    },
+    round2:{
+        q1:{
+            q: "Luminosity of Deneb",
+            options: {
+                1: "200,000L☉",
+                2: "100,000L☉"
+            },
+            correct: 1
+        },
+        q2:{
+            q: "Color of Aldebaran",
+            options: {
+                1: "Yellow",
+                2: "Orange"
+            },
+            correct: 1
+        },
+        q3:{
+            q: "Temperature of Betelgeuse",
+            options: {
+                1: "11,500K",
+                2: "3,200K"
+            },
+            correct: 2
+        },
+        q4:{
+            q: "Life Cycle Stage of Sun",
+            options: {
+                1: "Red Giant",
+                2: "Main Sequence",
+                3: "White Dwarf"
+            },
+            correct: 2
+        }
+        ,
+        q5:{
+            q: "Early Stage Star with luminosity of less than 0.001L☉",
+            options: {
+                1: "Procyon B",
+                2: "Barnard's Star",
+                3: "Proxima Centauri"
+            },
+            correct: 3
+        }
+    }
 }
 
 var round = 1;
@@ -91,18 +177,20 @@ var begun = false;
 
 var questionList = [];
 var missedList = [];
+var startTime = 0;
+var timeBonus = 0;
 
 function newQuestion(){
     generateQuestion();
     choices = [];
     console.log(`Round ref:${roundRef} questionRef:${questionRef}`);
-    let question = game[roundRef][questionRef];
-    document.getElementById("question").innerHTML = game[roundRef][questionRef].q;
+    let question = game2[roundRef][questionRef];
+    document.getElementById("question").innerHTML = game2[roundRef][questionRef].q;
     for(let element of Object.keys(question.options)){
         choices.push(question.options[element]);
     }
     newCreated = true;
-    correct = game[roundRef][questionRef].correct;
+    correct = game2[roundRef][questionRef].correct;
     clearButtons();
     setTimeout(buildOptions,2000);
 }
@@ -122,6 +210,7 @@ function buildOptions(){
     document.querySelectorAll(".btn").forEach(el => el.addEventListener("click", function() {
         checkAnswer(this);
     }));
+    startTime = new Date();
 }
 
 function randomizeQuestionOrder(){
@@ -147,12 +236,14 @@ function checkAnswer(e){
     var t = d.getTime();
     if(t-lastClick>1500){
         if(!ended){
+            let currentTime = new Date();
+            timeBonus = currentTime - startTime;
             if(e.value==correct){
-                document.getElementById("message").innerHTML = "Correct";
-                document.getElementById("message").classList.remove("lose-class");
-                questionList[question-1] = 1;
-                console.log(`${question} question number ----------`);
 
+                document.getElementById("message").innerHTML = `Correct!`;
+                document.getElementById("message").classList.remove("lose-class");
+
+                questionList[question-1] = 1;
                 question++;
                 questionRef = "q"+question;
 
@@ -160,7 +251,7 @@ function checkAnswer(e){
                     console.log("NewRound!");
                     round++;
                     setRound(round);
-                    addSplash();
+
                     document.body.style.background = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
                 }
                 winCount++;
@@ -172,6 +263,7 @@ function checkAnswer(e){
             else{
                 document.getElementById("message").innerHTML = "Nah.";
                 document.getElementById("message").classList.add("lose-class");
+
                 wrongClicks++;
                 newQuestion();
                 missedList.push([roundRef,questionRef]);
@@ -203,15 +295,17 @@ function setRound(r){
         question = 1;
         questionRef = `q${question}`;
         questionList = [];
-        for(let i = 0; i<Object.keys(game[roundRef]).length; i++){
+        for(let i = 0; i<Object.keys(game2[roundRef]).length; i++){
             questionList.push(0);
         }
         document.getElementById("round").innerHTML = `Round ${round}`;
+        document.getElementById("message").innerHTML = "New Round";
+        addSplash();
     }
 }
 
 function gameOver(){
-    let gameLength = Object.keys(game).length+1;
+    let gameLength = Object.keys(game2).length+1;
     //console.log(`Game length=${gameLength}`);
     if(round == gameLength){return true};
     return false
