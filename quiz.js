@@ -131,7 +131,7 @@ var game2 = {
                 1: "Yellow",
                 2: "Orange"
             },
-            correct: 1
+            correct: 2
         },
         q3:{
             q: "Temperature of Betelgeuse",
