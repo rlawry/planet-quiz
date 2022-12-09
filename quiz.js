@@ -2,163 +2,164 @@ var buttons = [];
 var choices = [];
 
 
-var game = {
-    round1:{
-        q1:{
-            q: "Earth _________ the Sun",
-            options: {
-                1: "Revolves around",
-                2: "Rotates around"
+var games = {
+    game1:{
+        round1:{
+            q1:{
+                q: "Earth _________ the Sun",
+                options: {
+                    1: "Revolves around",
+                    2: "Rotates around"
+                },
+                correct: 1
             },
-            correct: 1
+            q2:{
+                q: "The Moon _________ Earth",
+                options: {
+                    1: "Revolves around",
+                    2: "Rotates around"
+                },
+                correct: 1
+            },
+            q3:{
+                q: "Earth _________ on its axis",
+                options: {
+                    1: "Revolves",
+                    2: "Rotates"
+                },
+                correct: 2
+            },
+            q4:{
+                q: "The Sun appears to move through the sky during the day.",
+                options: {
+                    1: "Earth Revolves around the Sun",
+                    2: "Earth Rotates on its axis"
+                },
+                correct: 2
+            },
+            q5:{
+                q: "The constellations are changing each month",
+                options: {
+                    1: "Earth Revolves around the Sun",
+                    2: "Earth Rotates on its axis"
+                },
+                correct: 1
+            }
         },
-        q2:{
-            q: "The Moon _________ Earth",
-            options: {
-                1: "Revolves around",
-                2: "Rotates around"
+        round2:{
+            q1:{
+                q: "Earth revolves",
+                options: {
+                    1: "Around the Sun",
+                    2: "On its Axis"
+                },
+                correct: 1
             },
-            correct: 1
-        },
-        q3:{
-            q: "Earth _________ on its axis",
-            options: {
-                1: "Revolves",
-                2: "Rotates"
+            q2:{
+                q: "The Moon rotates",
+                options: {
+                    1: "Around Earth",
+                    2: "On its Axis"
+                },
+                correct: 2
             },
-            correct: 2
-        },
-        q4:{
-            q: "The Sun appears to move through the sky during the day.",
-            options: {
-                1: "Earth Revolves around the Sun",
-                2: "Earth Rotates on its axis"
-            },
-            correct: 2
-        },
-        q5:{
-            q: "The constellations are changing each month",
-            options: {
-                1: "Earth Revolves around the Sun",
-                2: "Earth Rotates on its axis"
-            },
-            correct: 1
+            q3:{
+                q: "The stars circle Polaris because Earth...",
+                options: {
+                    1: "Revolves around the Sun",
+                    2: "Rotates on its Axis"
+                },
+                correct: 2
+            }
         }
     },
-    round2:{
-        q1:{
-            q: "Earth revolves",
-            options: {
-                1: "Around the Sun",
-                2: "On its Axis"
+    game2:{
+        round1:{
+            q1:{
+                q: "Polaris is ________ than the Sun",
+                options: {
+                    1: "Bigger",
+                    2: "Smaller"
+                },
+                correct: 1
             },
-            correct: 1
+            q2:{
+                q: "Rigel is ______ than Polaris",
+                options: {
+                    1: "Colder",
+                    2: "Hotter"
+                },
+                correct: 2
+            },
+            q3:{
+                q: "Barnard's Star is ___________ than Proxima Centauri",
+                options: {
+                    1: "Larger",
+                    2: "Smaller"
+                },
+                correct: 1
+            },
+            q4:{
+                q: "Alpha Centauri is ___________ than Sirius",
+                options: {
+                    1: "Redder",
+                    2: "Bluer"
+                },
+                correct: 1
+            },
+            q5:{
+                q: "Spica is ___________ than 40 Eridani B",
+                options: {
+                    1: "Dimmer",
+                    2: "Brighter"
+                },
+                correct: 2
+            }
         },
-        q2:{
-            q: "The Moon rotates",
-            options: {
-                1: "Around Earth",
-                2: "On its Axis"
+        round2:{
+            q1:{
+                q: "Luminosity of Deneb",
+                options: {
+                    1: "200,000L☉",
+                    2: "100,000L☉"
+                },
+                correct: 1
             },
-            correct: 2
-        },
-        q3:{
-            q: "The stars circle Polaris because Earth...",
-            options: {
-                1: "Revolves around the Sun",
-                2: "Rotates on its Axis"
+            q2:{
+                q: "Color of Aldebaran",
+                options: {
+                    1: "Yellow",
+                    2: "Orange"
+                },
+                correct: 2
             },
-            correct: 2
-        }
-    }
-}
-
-var game2 = {
-    round1:{
-        q1:{
-            q: "Polaris is ________ than the Sun",
-            options: {
-                1: "Bigger",
-                2: "Smaller"
+            q3:{
+                q: "Temperature of Betelgeuse",
+                options: {
+                    1: "11,500K",
+                    2: "3,200K"
+                },
+                correct: 2
             },
-            correct: 1
-        },
-        q2:{
-            q: "Rigel is ______ than Polaris",
-            options: {
-                1: "Colder",
-                2: "Hotter"
-            },
-            correct: 2
-        },
-        q3:{
-            q: "Barnard's Star is ___________ than Proxima Centauri",
-            options: {
-                1: "Larger",
-                2: "Smaller"
-            },
-            correct: 1
-        },
-        q4:{
-            q: "Alpha Centauri is ___________ than Sirius",
-            options: {
-                1: "Redder",
-                2: "Bluer"
-            },
-            correct: 1
-        },
-        q5:{
-            q: "Spica is ___________ than 40 Eridani B",
-            options: {
-                1: "Dimmer",
-                2: "Brighter"
-            },
-            correct: 2
-        }
-    },
-    round2:{
-        q1:{
-            q: "Luminosity of Deneb",
-            options: {
-                1: "200,000L☉",
-                2: "100,000L☉"
-            },
-            correct: 1
-        },
-        q2:{
-            q: "Color of Aldebaran",
-            options: {
-                1: "Yellow",
-                2: "Orange"
-            },
-            correct: 2
-        },
-        q3:{
-            q: "Temperature of Betelgeuse",
-            options: {
-                1: "11,500K",
-                2: "3,200K"
-            },
-            correct: 2
-        },
-        q4:{
-            q: "Life Cycle Stage of Sun",
-            options: {
-                1: "Red Giant",
-                2: "Main Sequence",
-                3: "White Dwarf"
-            },
-            correct: 2
-        }
-        ,
-        q5:{
-            q: "Early Stage Star with luminosity of less than 0.001L☉",
-            options: {
-                1: "Procyon B",
-                2: "Barnard's Star",
-                3: "Proxima Centauri"
-            },
-            correct: 3
+            q4:{
+                q: "Life Cycle Stage of Sun",
+                options: {
+                    1: "Red Giant",
+                    2: "Main Sequence",
+                    3: "White Dwarf"
+                },
+                correct: 2
+            }
+            ,
+            q5:{
+                q: "Early Stage Star with luminosity of less than 0.001L☉",
+                options: {
+                    1: "Procyon B",
+                    2: "Barnard's Star",
+                    3: "Proxima Centauri"
+                },
+                correct: 3
+            }
         }
     }
 }
@@ -167,6 +168,8 @@ var round = 1;
 var roundRef = "round1";
 var question = 1;
 var questionRef = "q1";
+var game = 2;
+var gameRef = `game${game}`;
 var roundCorrect = [];
 var handicap = 0;
 var correct;
@@ -184,13 +187,13 @@ function newQuestion(){
     generateQuestion();
     choices = [];
     console.log(`Round ref:${roundRef} questionRef:${questionRef}`);
-    let question = game2[roundRef][questionRef];
-    document.getElementById("question").innerHTML = game2[roundRef][questionRef].q;
+    let question = game[gameRef][roundRef][questionRef];
+    document.getElementById("question").innerHTML = game[gameRef][roundRef][questionRef].q;
     for(let element of Object.keys(question.options)){
         choices.push(question.options[element]);
     }
     newCreated = true;
-    correct = game2[roundRef][questionRef].correct;
+    correct = game[gameRef][roundRef][questionRef].correct;
     clearButtons();
     setTimeout(buildOptions,2000);
 }
@@ -295,7 +298,7 @@ function setRound(r){
         question = 1;
         questionRef = `q${question}`;
         questionList = [];
-        for(let i = 0; i<Object.keys(game2[roundRef]).length; i++){
+        for(let i = 0; i<Object.keys(game[gameRef][roundRef]).length; i++){
             questionList.push(0);
         }
         document.getElementById("round").innerHTML = `Round ${round}`;
@@ -305,7 +308,7 @@ function setRound(r){
 }
 
 function gameOver(){
-    let gameLength = Object.keys(game2).length+1;
+    let gameLength = Object.keys(game[gameRef]).length+1;
     //console.log(`Game length=${gameLength}`);
     if(round == gameLength){return true};
     return false
